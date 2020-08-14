@@ -54,4 +54,4 @@ plt.savefig(args.title.replace(" ", "_") + '.eps')
 if args.show:
     plt.show()
 
-
+plt.close()
