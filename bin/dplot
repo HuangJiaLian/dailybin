@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+import matplotlib.pyplot as plt 
+import numpy as np
+import argparse
+import textwrap
+import os, sys
+
+parser = argparse.ArgumentParser(
+        prog='dplot',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=textwrap.dedent('''\
+        Example:
+        dplot -F AllDat.csv -X 0 -Y 1 2 --dlabels "Tem" "Mean Tem" --xlabel Steps --ylabel "Temperature (K)" -T "Temperature Changes Over Step"
+        '''))
+    
+parser.add_argument('-F', '--file2plot', help='The text file to plot.')
+parser.add_argument('-X', '--xcol', nargs='?', const=0, type=int, default=0, \
+                    help='The number of column as x axis')
+parser.add_argument('-Y', '--ycols', nargs='+', type=int, \
+                     help='The list number of column as y', default=[1])
+parser.add_argument('--dlabels', nargs='+', \
+                     help='The list of data label')
+parser.add_argument('--xlabel', help='The name of x label', default='x')
+parser.add_argument('--ylabel', help='The name of y label', default='y')
+parser.add_argument('-T', '--title', help='The title of this plot', default='dplotFigure')
+
+parser.add_argument('--show', dest='show', action='store_true')
+parser.add_argument('--no-show', dest='show', action='store_false')
+parser.set_defaults(show=False)
+
+args = parser.parse_args()
+
+
+# print(args.file2plot, args.xcol, args.ycols, args.xlabel, args.ylabel, args.title)
+
+# Read Text File
+dat = np.loadtxt(args.file2plot)
+
+
+fig1 = plt.figure()
+# plt.figure(figsize=(15,10))
+ax = fig1.add_subplot(1,1,1)
+for col, dlabel in zip(args.ycols, args.dlabels):
+    ax.plot(dat[:, args.xcol], dat[:, col], label=dlabel)
+# plt.xlim(0,1)
+# plt.ylim(0,1)
+plt.title(args.title)
+plt.xlabel(args.xlabel)
+plt.ylabel(args.ylabel)
+plt.grid()
+plt.legend()
+print(args.title.replace(" ", "_") + '.eps')
+plt.savefig(args.title.replace(" ", "_") + '.eps')  
+if args.show:
+    plt.show()
+
+
