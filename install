@@ -25,6 +25,5 @@ echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
 echo "#############################<<<End" >> $envFile
 
 # Source to update environment.
-source $envFile
 echo "Dailybin installed successfully."
 echo "Restart your Terminal to make effect."
