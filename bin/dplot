@@ -51,6 +51,7 @@ plt.grid()
 plt.legend()
 print(args.title.replace(" ", "_") + '.eps')
 plt.savefig(args.title.replace(" ", "_") + '.eps')  
+plt.savefig(args.title.replace(" ", "_") + '.png')  
 if args.show:
     plt.show()
 
