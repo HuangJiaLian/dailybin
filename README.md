@@ -14,4 +14,12 @@ Done. Files saved at ./ExtractData/
 (tf20) hj@node20:~/Jack/64H2O$ ls ./ExtractData/
 AllDat.csv  KineticEnergy.csv  PotentialEnergy.csv  StepNumber.csv  TempChange.csv
 ```
+- dplot: plot csv data easily
+
+Usage:
+
+```bash
+dplot -F AllDat.csv  -X 0 -Y 1 2 --dlabels "Tem" "Mean Tem" --xlabel Steps --ylabel "Temperature (K)" -T "Temperature Changes Over Step"
+```
+
 
