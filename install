@@ -1,10 +1,20 @@
 #!/bin/bash
 
+defaultShell=$SHELL
+
 # Check the Operating System to get the default environment file
 if [ "$(uname)" == "Darwin" ]; then
-    envFile=$HOME/.bash_profile
+    if [[ $defaultShell == *"bash"* ]]; then
+        envFile=$HOME/.bash_profile
+    elif [[ $defaultShell == *"zsh"* ]]; then
+	envFile=$HOME/.zshrc
+    fi
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    envFile=$HOME/.bashrc
+    if [[ $defaultShell == *"bash"* ]]; then
+        envFile=$HOME/.bashrc
+    elif [[ $defaultShell == *"zsh"* ]]; then
+	envFile=$HOME/.zshrc
+    fi
 fi
 
 dailybinPath=`pwd`
