@@ -21,8 +21,8 @@ echo >> $envFile
 echo "###################################" >> $envFile
 echo "#####  Add by Daily Bin ###########" >> $envFile
 echo "############################Start>>>" >> $envFile
-echo export PATH="\"${dailybinPath}/bin:\$PATH\"\n" >> $envFile
-echo "#############################<<<End\n" >> $envFile
+echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
+echo "#############################<<<End" >> $envFile
 
 # Source to update environment.
 source $envFile
