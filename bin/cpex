@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Get Command Line Parameter
+echo "******************************************"
+echo "A tool to extract data from cp2k outfile."
+if [ "$#" -ne 1 ]; then
+    echo "Ooooops. Useage: ${0} OUTFILENAME"
+    exit -1
+fi
+echo "File Name:  ${1}"
+
+OutFolder=ExtractData
+
+# Make dir
+mkdir -p $OutFolder
+
+grep '^ STEP NUMBER' ${1} | awk {'print $4'} > $OutFolder/StepNumber.csv
+grep '^ TEMPERATURE' ${1} | awk '{print $4, $5}' > $OutFolder/TempChange.csv
+grep '^ POTENTIAL ENERGY' ${1} | awk '{print $4, $5}' > $OutFolder/PotentialEnergy.csv
+grep '^ KINETIC ENERGY' ${1} | awk '{print $5, $6}' > $OutFolder/KineticEnergy.csv
+paste $OutFolder/StepNumber.csv $OutFolder/TempChange.csv $OutFolder/PotentialEnergy.csv $OutFolder/KineticEnergy.csv > $OutFolder/AllDat.csv
+echo 'Done. Files saved at ./ExtractData/'
+echo "******************************************"
+
