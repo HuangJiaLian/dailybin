@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Get the default shell
 defaultShell=$SHELL
 
 # Check the Operating System to get the default environment file
@@ -32,8 +33,14 @@ echo "###################################" >> $envFile
 echo "#####  Add by Daily Bin ###########" >> $envFile
 echo "############################Start>>>" >> $envFile
 echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
+
+## Add 'open' tool to open folder from Linux Command
+if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "alias open=\"xdg-open\"" >> $envFile
+fi
+
 echo "#############################<<<End" >> $envFile
 
-# Source to update environment.
+# Show Tip to source environment file.
 echo "Dailybin installed successfully."
 echo "Restart your Terminal to make effect."
