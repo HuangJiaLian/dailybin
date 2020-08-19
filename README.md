@@ -47,4 +47,22 @@ open .
 ```
 Will open current folder with your file manager.
 
+## Useful 3rd party tools
+- [trans](https://github.com/soimort/translate-shell): Translate Shell (formerly Google Translate CLI) is a command-line translator
+
+Usage:
+```bash
+>trans "學而不思則罔，思而不學則殆"
+>學而不思則罔，思而不學則殆
+(Xué ér bù sī zé wǎng, sī ér bù xué zé dài)
+
+Learning without thinking is nothing, thinking without learning is perishable
+
+Translations of 學而不思則罔，思而不學則殆
+[ 简体中文 -> English ]
+
+學而不思則罔，思而不學則殆
+    Learning without thinking is nothing, thinking without learning is perishable, Learning without thought is labor lost, thought without learning is perilous
+```
+
 
