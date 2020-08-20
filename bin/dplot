@@ -24,7 +24,7 @@ parser.add_argument('--dlabels', nargs='+', \
                      help='The list of data label')
 parser.add_argument('--xlabel', help='The name of x label', default='x')
 parser.add_argument('--ylabel', help='The name of y label', default='y')
-parser.add_argument('-T', '--title', help='The title of this plot', default='dplotFigure')
+parser.add_argument('-T', '--title', help='The title of this plot', default='')
 
 parser.add_argument('-S', '--start', nargs='?', const=0, type=int, default=0, \
                     help='Start to draw from row S')
