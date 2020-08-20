@@ -45,7 +45,7 @@ dat = np.loadtxt(args.file2plot)
 if args.end > 0:
     dat = dat[args.start:args.end + 1]
 elif args.end < 0:
-    numRows = dat.shape(0)
+    numRows = dat.shape[0]
     dat = dat[args.start:numRows+args.end+2]
 
 
