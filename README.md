@@ -47,7 +47,7 @@ open .
 ```
 Will open current folder with your file manager.
 
-## Useful 3rd party tools
+## Useful tools
 - [trans](https://github.com/soimort/translate-shell): Translate Shell (formerly Google Translate CLI) is a command-line translator
 
 Usage:
@@ -63,6 +63,13 @@ Translations of 學而不思則罔，思而不學則殆
 
 學而不思則罔，思而不學則殆
     Learning without thinking is nothing, thinking without learning is perishable, Learning without thought is labor lost, thought without learning is perilous
+```
+
+- npy2txt: a command line tool to convert `.npy` file to `.txt`	file
+
+Usage:
+```bash
+npy2txt data.npy
 ```
 
 

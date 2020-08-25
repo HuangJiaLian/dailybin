@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+import os 
+import numpy as np 
+import sys
+
+if len(sys.argv) < 2:
+    print("Ooops. Usage:" + sys.argv[0] + ' npyFile')
+    exit()
+
+data =  np.load(sys.argv[1])
+fileName = sys.argv[1][:-3] + 'txt'
+np.savetxt(fileName, data)
+print('Saved as {}'.format(fileName))
