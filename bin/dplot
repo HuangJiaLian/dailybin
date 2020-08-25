@@ -32,8 +32,12 @@ parser.add_argument('-E', '--end', nargs='?', const=-1, type=int, default=-1, \
                     help='End at row E')
 
 parser.add_argument('--show', dest='show', action='store_true')
-parser.add_argument('--no-show', dest='show', action='store_false')
 parser.set_defaults(show=False)
+
+parser.add_argument('--logx', dest='logx', action='store_true')
+parser.add_argument('--logy', dest='logy', action='store_true')
+parser.set_defaults(logx=False)
+parser.set_defaults(logy=False)
 
 args = parser.parse_args()
 
@@ -48,12 +52,18 @@ elif args.end < 0:
     numRows = dat.shape[0]
     dat = dat[args.start:numRows+args.end+2]
 
-
 fig1 = plt.figure()
 # plt.figure(figsize=(15,10))
 ax = fig1.add_subplot(1,1,1)
 for col, dlabel in zip(args.ycols, args.dlabels):
     ax.plot(dat[:, args.xcol], dat[:, col], label=dlabel)
+
+if args.logx == True:
+    ax.set_xscale('log')
+
+if args.logy == True:
+    ax.set_yscale('log')
+
 # plt.xlim(0,1)
 # plt.ylim(0,1)
 plt.title(args.title)
@@ -61,7 +71,6 @@ plt.xlabel(args.xlabel)
 plt.ylabel(args.ylabel)
 plt.grid()
 plt.legend()
-print(args.title.replace(" ", "_") + '.eps')
 plt.savefig(args.title.replace(" ", "_") + '.eps')  
 plt.savefig(args.title.replace(" ", "_") + '.png')  
 if args.show:
