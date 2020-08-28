@@ -16,6 +16,7 @@ eg. `.bashrc`, `.bash_profile`, `.zshrc`, etc.
 
 ## cp2k related
 - cpex: cp2k data extract from out file.
+- plot_dynamics: a fast plotting tool to plot the time dependence of the energies and temperature of the system one studied. NOTE: This command is based on `dplot`, and it should be run under the directory `ExtractData`.
 
 Usage:
 ```bash
@@ -26,7 +27,10 @@ File Name:  64H2O_298.15K.out
 Done. Files saved at ./ExtractData/
 ******************************************
 (tf20) hj@node20:~/Jack/64H2O$ ls ./ExtractData/
-AllDat.csv  KineticEnergy.csv  PotentialEnergy.csv  StepNumber.csv  TempChange.csv
+******************************************
+$ plot_dynamics
+$ ls
+AllDat.csv  KineticEnergy.csv  KineticEnergy.png  PotentialEnergy.csv  PotentialEnergy.png  StepNumber.csv  TempChange.csv  Temperature.png
 ```
 
 ## Visualization
