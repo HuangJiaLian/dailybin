@@ -1,0 +1,4 @@
+#! /bin/bash
+dplot -F AllDat.csv -X 0 -Y 1 2 --dlabels "T" "Running Ave. T" --xlabel "Time" --ylabel "T" -T "Temperature"
+dplot -F AllDat.csv -X 0 -Y 3 4 --dlabels "Pot. Ener." "Running Ave. E_p" --xlabel "Time" --ylabel "Pot. Ener." -T "PotentialEnergy"
+dplot -F AllDat.csv -X 0 -Y 5 6 --dlabels "Kinetic Ener." "Running Ave. E_k" --xlabel "Time" --ylabel "Kinetic Ener." -T "KineticEnergy"
