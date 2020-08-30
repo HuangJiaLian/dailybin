@@ -77,3 +77,26 @@ npy2txt data.npy
 ```
 
 
+- dat2csv: a command line tool to convert `.txt` (`.dat`)  file to a `.csv` file
+
+Usage:
+
+For single file, use
+
+```shell
+dat2csv data.txt
+```
+
+for multiple files, use
+
+```shell
+dat2csv data1.txt dat2.txt
+```
+
+If you want to convert all `.txt`  files to `.csv` files, use 
+
+```shell
+dat2csv *.txt
+```
+
+128w_bk_n.dat
