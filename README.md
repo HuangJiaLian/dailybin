@@ -98,5 +98,3 @@ If you want to convert all `.txt`  files to `.csv` files, use
 ```shell
 dat2csv *.txt
 ```
-
-128w_bk_n.dat
