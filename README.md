@@ -131,4 +131,8 @@ H 8.02236 4.45941 0.493411
 H 7.66956 5.66513 1.53668
 O 14.5847 13.2403 11.3342
 ```
-.
+
+- reoh: a commamd line to convert number type in .xyz file to HO type and rerange 
+like cp2k 
+
+
