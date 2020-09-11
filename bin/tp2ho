@@ -19,7 +19,6 @@ while line:
     elif num_atom in line:
         f2.write(line)
     else:
-        print(line)
         try:
             frist_char = line[0]
             if frist_char == '1':
