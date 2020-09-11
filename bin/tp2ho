@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+###########################
+# Author: Ai Yang (Ya)
+# Time: 10/9/2020
+###########################
+
 import sys 
 
 if len(sys.argv) < 2:
@@ -7,7 +12,8 @@ if len(sys.argv) < 2:
     exit()
 
 f1 = open(sys.argv[1],'r')
-f2 = open(sys.argv[1].split('.xyz')[0] + '_OH.xyz', 'w')
+out_name = sys.argv[1].split('.xyz')[0] + '_OH.xyz'
+f2 = open(out_name, 'w')
 line = f1.readline()
 num_atom = line
 f2.write(line)
@@ -31,3 +37,5 @@ while line:
 
 f1.close()
 f2.close()
+
+print('{} saved.'.format(out_name))
