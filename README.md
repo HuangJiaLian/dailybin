@@ -136,3 +136,19 @@ O 14.5847 13.2403 11.3342
 like cp2k 
 
 
+- aveg: A command line program to calculate average value of a given list
+
+Example:
+```bash
+(tf20) mac@Macbook:~/Desktop$ cat test.txt
+5.9779103
+5.9810555
+5.9745009
+5.9779188
+5.9763435
+5.9829963
+(tf20) mac@Macbook:~/Desktop$ cat test.txt | aveg
+5.97845
+(tf20) mac@Macbook:~/Desktop$ aveg test.txt
+5.97845
+```

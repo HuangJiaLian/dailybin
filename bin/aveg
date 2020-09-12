@@ -1,0 +1,8 @@
+#!/bin/bash
+
+######################################################
+# Program to calculate average value of a given list.
+# By Jack Huang 12/09/2020
+######################################################
+
+awk '{ total += $1; count++ } END { print total/count }' $1
