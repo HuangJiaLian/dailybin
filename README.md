@@ -152,3 +152,12 @@ Example:
 (tf20) mac@Macbook:~/Desktop$ aveg test.txt
 5.97845
 ```
+
+- exthermo: A command line program to extract thermo data from LAMMPS log file.
+
+Example:
+
+```bash
+exthermo log.lammps
+```
+
