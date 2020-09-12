@@ -7,7 +7,7 @@ if len(sys.argv) < 2:
     exit()
 
 f1 = open(sys.argv[1],'r')
-out_name = sys.argv[1].split('.xyz')[0] + '_RROH.xyz'
+out_name = sys.argv[1].split('.xyz')[0] + '_RR.xyz'
 f2 = open(out_name, 'w')
 
 
