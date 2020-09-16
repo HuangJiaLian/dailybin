@@ -13,14 +13,14 @@ parser = argparse.ArgumentParser(
         dplot -F AllDat.csv -X 0 -Y 1 2 --dlabels "Tem" "Mean Tem" --xlabel Steps --ylabel "Temperature (K)" -T "Temperature Changes Over Step"
         '''))
     
-parser.add_argument('-F', '--file2plot', help='The text file to plot.')
+parser.add_argument('-F', '--files2plot', nargs='+', help='The text files to plot.')
 
 parser.add_argument('-X', '--xcol', nargs='?', const=0, type=int, default=0, \
                     help='The number of column as x axis')
 parser.add_argument('-Y', '--ycols', nargs='+', type=int, \
                      help='The list number of column as y', default=[1])
 
-parser.add_argument('--dlabels', nargs='+', \
+parser.add_argument('--dlabels', nargs='+',\
                      help='The list of data label')
 parser.add_argument('--xlabel', help='The name of x label', default='x')
 parser.add_argument('--ylabel', help='The name of y label', default='y')
@@ -47,19 +47,33 @@ args = parser.parse_args()
 
 
 
-# Read Text File and leave what needs to plot
-dat = np.loadtxt(args.file2plot)
+# Read Text Files and leave what needs to plot
+numFiles = len(args.files2plot)
+dats = []
+for F in args.files2plot:
+    dat = np.loadtxt(F)
 
-if args.end > 0:
-    dat = dat[args.start:args.end + 1]
-elif args.end < 0:
-    numRows = dat.shape[0]
-    dat = dat[args.start:numRows+args.end+2]
+    if args.end > 0:
+        dat = dat[args.start:args.end + 1]
+    elif args.end < 0:
+        numRows = dat.shape[0]
+        dat = dat[args.start:numRows+args.end+2]
+    
+    dats.append(dat)
 
 fig1 = plt.figure()
 ax = fig1.add_subplot(1,1,1)
-for col, dlabel in zip(args.ycols, args.dlabels):
-    ax.plot(dat[:, args.xcol], dat[:, col], label=dlabel)
+
+
+# Plot text Files
+# print('Debug {}'.format(dats))
+for dat, num in zip(dats, range(numFiles)):
+    # print('Debug {}'.format(dat))
+    # for col, dlabel in zip(args.ycols, args.dlabels):
+    for col, i in zip(args.ycols, range(len(args.ycols))):
+        dlabel = args.dlabels[i]
+        label = dlabel if numFiles == 1 else dlabel + ' ' + str(num)
+        ax.plot(dat[:, args.xcol], dat[:, col], label=label)
 
 if args.logx == True:
     ax.set_xscale('log')
@@ -72,13 +86,15 @@ if args.logy == True:
 plt.title(args.title)
 plt.xlabel(args.xlabel)
 plt.ylabel(args.ylabel)
+
 plt.grid()
 plt.legend()
 
+title = 'fig_dplot' if len(args.title) == 0 else args.title
 if args.eps:
-    plt.savefig(args.title.replace(" ", "_") + '.eps')  
+    plt.savefig(title.replace(" ", "_") + '.eps')  
 else:
-    plt.savefig(args.title.replace(" ", "_") + '.png')  
+    plt.savefig(title.replace(" ", "_") + '.png')  
 
 if args.show:
     plt.show()
