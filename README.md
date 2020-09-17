@@ -161,3 +161,11 @@ Example:
 exthermo log.lammps
 ```
 
+- sampleevery: A command line programs to sample `.xyz` file.
+
+Example:
+
+This command will sample `text.xyz` every 2 dumps.
+```bash
+sampleevery test.xyz 2
+```

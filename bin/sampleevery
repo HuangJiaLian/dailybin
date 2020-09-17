@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Read how many antoms at each dump
+numAtoms=`cat $1 | head -n 1`
+sampleEvery=$2
+
+# Change the output name.
+suffix='.xyz'
+nameSuffixRemoved=${1%"$suffix"}
+outName="${nameSuffixRemoved}_${2}delta_t${suffix}"
+
+# Data processing 
+cat $1 | \
+	awk -v nat=$numAtoms  -v skip=$sampleEvery 'NR%(skip*(nat+2)) < (nat+2)+1 && NR%(2*(nat+2))>0 {print $0}' | \
+	awk -v nat=$numAtoms '{if(NR%(nat+2)==2){printf "%s %s %8d, %4s %s %12.3f, %s %s %20.10f\n", $1, $2, (2+$3)/2, $4, $5, $6, $7, $8, $9}else{print $0}}' > \
+	$outName 
+
