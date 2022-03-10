@@ -6,39 +6,52 @@ if len(sys.argv) < 2:
     print("Ooops. Usage:" + sys.argv[0] + ' xyzFile')
     exit()
 
+# Original file
 f1 = open(sys.argv[1],'r')
-out_name = sys.argv[1].split('.xyz')[0] + '_RROH.xyz'
+
+# Output file
+if len(sys.argv) == 3:
+    out_name = sys.argv[2]
+else:
+    out_name = sys.argv[1].split('.xyz')[0] + '_RROH.xyz' 
 f2 = open(out_name, 'w')
 
-
-
+# File as a variable to get the atom numbers
 f3 = open(sys.argv[1],'r')
-num_atom = f3.readline()
+num_atom = f3.readline() # Type is string
 num = int(num_atom)
 f3.close()
+# print('Number of atoms:{}'.format(num))
 
+# Ya is a guy who company with me to write this program
 line = 'Ya'
+
+# A section_O is to store all O atom info in one frame
 section_O = section_H = ''
 
+# Read input file and write to output file
+# line by line
 while line:
     if len(line) == 0:
         print('End')
         break
     if num_atom == line:
-        f2.write(section_O + section_H) 
-        section_O = section_H = ''
-        f2.write(line)
-        line = f1.readline()
-        f2.write(line)
+        f2.write(section_O + section_H) # Rearranged atom info
+        section_O = section_H = '' # Empty section
+        f2.write(line) # Write the line of atom number
+        line = f1.readline() 
+        f2.write(line) # Write next attribute line
         line = f1.readline()
     else:
         frist_char = line[0]
-        if frist_char == '1':
+        if frist_char == '1' or frist_char == 'O':
             section_O += 'O' + line[1:]
-        elif frist_char == '2':
+        elif frist_char == '2' or frist_char == 'H':
             section_H += 'H' + line[1:]
         else:
-            print('-------------------------\nYa, you are soooo cool!!!\n-------------------------\n\
+            # At the very begining, a cow will show up as first char is 'Y'
+
+            print('------------------------------\nFormating water xyz like CP2K\nYa, you are soooo cool!!!\n------------------------------\n\
         \   ^__^\n\
          \  (oo)\_______\n\
             (__)\       )\/\n\

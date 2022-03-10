@@ -30,7 +30,7 @@ parser.add_argument('-S', '--start', nargs='?', const=0, type=int, default=0, \
                     help='Start to draw from row S')
 parser.add_argument('-E', '--end', nargs='?', const=-1, type=int, default=-1, \
                     help='End at row E')
-
+parser.add_argument('-O', '--output', help='The output file name', default='')
 parser.add_argument('--show', dest='show', action='store_true')
 parser.set_defaults(show=False)
 
@@ -90,11 +90,15 @@ plt.ylabel(args.ylabel)
 plt.grid()
 plt.legend()
 
-title = 'fig_dplot' if len(args.title) == 0 else args.title
-if args.eps:
-    plt.savefig(title.replace(" ", "_") + '.eps')  
+if len(args.output) == 0:
+    title = 'fig_dplot' if len(args.title) == 0 else args.title
+    if args.eps:
+        plt.savefig(title.replace(" ", "_") + '.eps')  
+    else:
+        plt.savefig(title.replace(" ", "_") + '.png')  
 else:
-    plt.savefig(title.replace(" ", "_") + '.png')  
+    title = args.output
+    plt.savefig(title)
 
 if args.show:
     plt.show()
