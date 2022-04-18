@@ -49,15 +49,15 @@ while line:
         elif frist_char == '2' or frist_char == 'H':
             section_H += 'H' + line[1:]
         else:
+            pass
             # At the very begining, a cow will show up as first char is 'Y'
-
-            print('------------------------------\nFormating water xyz like CP2K\nYa, you are soooo cool!!!\n------------------------------\n\
-        \   ^__^\n\
-         \  (oo)\_______\n\
-            (__)\       )\/\n\
-                ||--vvv-|\n\
-                ||     ||\n\
-            ')
+            #print('------------------------------\nFormating water xyz like CP2K\nYa, you are soooo cool!!!\n------------------------------\n\
+        #\   ^__^\n\
+        # \  (oo)\_______\n\
+        #    (__)\       )\/\n\
+        #        ||--vvv-|\n\
+        #        ||     ||\n\
+        #    ')
         line = f1.readline()
 
 f2.write(section_O + section_H) 
