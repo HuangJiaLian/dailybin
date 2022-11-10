@@ -8,15 +8,19 @@ if len(sys.argv) < 3:
 
 # File to obtain atom number
 atom_num_line = 4
+discription_line = 9
 atom_num = -1
+type_idx = -1
 f0 = open(sys.argv[1],'r')
-for i in range(atom_num_line):
+for i in range(discription_line):
     line = f0.readline()
-    if i == 3:
+    if i == atom_num_line - 1:
         atom_num = int(line)
+    if i == discription_line -1:
+        type_idx = -len(line.split('type')[-1].split(' '))
 f0.close()
 print('Atom Number: {}'.format(atom_num))
-
+print('Atom Type Index: {}'.format(type_idx))
 
 # Original file
 f1 = open(sys.argv[1],'r')
@@ -35,17 +39,16 @@ while True:
         if i == 1:
             step = int(line)
     print('Step: {}'.format(step))
-
     # Write Head info of xyz file 
     f2.write('{}\n'.format(atom_num))
     f2.write('Atoms. Timestep: {}\n'.format(step))
     for i in range(atom_num):
         line = f1.readline()
-        items = line.split(' ')
-        if items[1] == '1':
-            f2.write('O {} {} {}'.format(items[-3], items[-2], items[-1]))
-        elif items[1] == '2':
-            f2.write('H {} {} {}'.format(items[-3], items[-2], items[-1]))
+        items = line.split()
+        if items[type_idx] == '1':
+            f2.write('O {} {} {}\n'.format(items[-3], items[-2], items[-1]))
+        elif items[type_idx] == '2':
+            f2.write('H {} {} {}\n'.format(items[-3], items[-2], items[-1]))
         else:
             pass
     pos = f1.tell()
