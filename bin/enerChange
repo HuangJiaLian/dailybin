@@ -23,6 +23,5 @@ os.system(combine)
 energy = np.loadtxt('Step_Energy.txt')
 plt.plot(energy[:, 0], energy[:, 1], label = "ENERGY")
 plt.xlabel('OPTIMIZATION STEP')
-plt.savefig('Step_Energy.png')
 plt.show()
 
