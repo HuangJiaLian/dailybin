@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+import numpy as np
+import plotext as plt
+import os 
+import sys
+
+if len(sys.argv) < 2:
+    print('Usage: {} LOGFILE'.format(sys.argv[0]))
+    exit()
+
+out_log =  sys.argv[1]
+print(out_log)
+
+obtain_step = 'grep \'OPTIMIZATION STEP\' {} '.format(out_log) + '| awk \'{print $3}\' > Steps.txt'
+obtain_energy = 'grep \'ENERGY\'  {} '.format(out_log) + '| awk \'{print $9}\' > Energy.txt'
+combine = 'paste Steps.txt Energy.txt > Step_Energy.txt'
+
+os.system(obtain_step)
+os.system(obtain_energy)
+os.system(combine)
+
+
+energy = np.loadtxt('Step_Energy.txt')
+plt.plot(energy[:, 0], energy[:, 1], label = "ENERGY")
+plt.xlabel('OPTIMIZATION STEP')
+plt.savefig('Step_Energy.png')
+plt.show()
+

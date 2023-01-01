@@ -33,6 +33,29 @@ $ ls
 AllDat.csv  KineticEnergy.csv  KineticEnergy.png  PotentialEnergy.csv  PotentialEnergy.png  StepNumber.csv  TempChange.csv  Temperature.png
 ```
 
+$ enerChange out.log
+text saved in /home/jack/Step_Energy.png
+        ┌──────────────────────────────────────────────────────────┐
+-3249.93┤ ▞▞ ENERGY                                                │
+        │ ▝▚▖                                                      │
+-3250.48┤   ▝▚▖                                                    │
+        │     ▝▚▖                                                  │
+        │       ▝▚▄                                                │
+-3251.04┤          ▀▀▀▄▄▄                                          │
+        │                ▀▀▀▚▄▄                                    │
+-3251.60┤                      ▀▀▚▄▄                               │
+        │                           ▀▀▚▄▖                          │
+-3252.15┤                               ▝▀▀▄▄▖                     │
+        │                                    ▝▀▀▄▄                 │
+        │                                         ▀▀▚▄▄            │
+-3252.71┤                                              ▀▀▚▄        │
+        │                                                  ▀▀▄▄    │
+-3253.27┤                                                      ▀▀▄▄│
+        └┬─────────────┬──────────────┬─────────────┬─────────────┬┘
+        1.0           2.5            4.0           5.5          7.0
+                              OPTIMIZATION STEP
+
+
 ## Visualization
 - dplot: plot csv data easily
 
