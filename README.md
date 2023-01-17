@@ -192,7 +192,7 @@ This command will sample `text.xyz` every 2 dumps.
 ```bash
 sampleevery test.xyz 2
 ```
-
+- aimd-process: plot the Pot. and Temp. along with time
 - dump2xyz: convert dumpfile format of water to xyz format 
 ```
 ITEM: TIMESTEP
