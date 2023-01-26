@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+import numpy as np
+import plotext as plt
+
+energy = np.loadtxt('Step_Energy.txt')
+plt.plot(energy[:, 0], energy[:, 1], label = "ENERGY")
+plt.xlabel('OPTIMIZATION STEP')
+plt.show()
+

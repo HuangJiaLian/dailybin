@@ -9,7 +9,7 @@ if len(sys.argv) < 2:
     exit()
 
 out_log =  sys.argv[1]
-obtain_step = 'grep \'OPTIMIZATION STEP\' {} '.format(out_log) + '| awk \'{print $3}\' > Steps.txt'
+obtain_step = 'grep \'OPTIMIZATION STEP:\' {} '.format(out_log) + '| awk \'{print $3}\' > Steps.txt'
 obtain_energy = 'grep \'ENERGY\'  {} '.format(out_log) + '| awk \'{print $9}\' > Energy.txt'
 combine = 'paste Steps.txt Energy.txt > Step_Energy.txt'
 
