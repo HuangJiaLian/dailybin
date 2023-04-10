@@ -5,14 +5,12 @@ defaultShell=$SHELL
 
 # Check the Operating System to get the default environment file
 if [ "$(uname)" == "Darwin" ]; then
-    echo "You are using MacOS"
     if [[ $defaultShell == *"bash"* ]]; then
         envFile=$HOME/.bash_profile
     elif [[ $defaultShell == *"zsh"* ]]; then
 	envFile=$HOME/.zshrc
     fi
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    echo "You are using Linux"
     if [[ $defaultShell == *"bash"* ]]; then
         envFile=$HOME/.bashrc
     elif [[ $defaultShell == *"zsh"* ]]; then
@@ -48,4 +46,4 @@ echo "#############################<<<End" >> $envFile
 
 # Show Tip to source environment file.
 echo "Dailybin installed successfully."
-echo "Restart your Terminal to make effect."
+echo "Restart the terminal to take effect."
