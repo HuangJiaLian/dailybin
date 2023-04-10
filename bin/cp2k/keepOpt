@@ -1,0 +1,17 @@
+#!/bin/bash
+# *************************************
+# * Handy program to keep optmization *
+# *************************************
+
+initconfig=$1
+traj=$2
+
+# Back up initconfig
+timestamp=$(date +'%Y_%m_%d_%H_%M_%S')
+mv $initconfig $initconfig\_$timestamp 
+
+# Extract the last frame as initial positions
+extractLast $traj > $initconfig 
+
+# Submit
+sbatch submit.sh

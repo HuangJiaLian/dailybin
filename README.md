@@ -54,8 +54,11 @@ text saved in /home/jack/Step_Energy.png
         └┬─────────────┬──────────────┬─────────────┬─────────────┬┘
         1.0           2.5            4.0           5.5          7.0
                               OPTIMIZATION STEP
--extractLast
+- extractLast
 To extractLast frame of xyz trajectory
+
+- keepOpt
+Keep optimization process; Use like this:  keepOpt In_GBL.xyz FAPbI3-pos-1.xyz
 
 ## Visualization
 - dplot: plot csv data easily
