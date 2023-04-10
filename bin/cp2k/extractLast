@@ -1,0 +1,12 @@
+#!/bin/bash
+# *************************************************************
+# * Handy program to extract the last frame of xyz trajectroy *
+# *************************************************************
+
+
+# Get the number of atoms from the second line of the file
+num_atoms=$(sed -n '1p' $1 | awk '{print $1}')
+num_lines=$(($num_atoms+2))
+
+# Print the final frame
+tail -n $num_lines $1
