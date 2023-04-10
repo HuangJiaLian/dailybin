@@ -5,12 +5,14 @@ defaultShell=$SHELL
 
 # Check the Operating System to get the default environment file
 if [ "$(uname)" == "Darwin" ]; then
+    echo "You are using MacOS"
     if [[ $defaultShell == *"bash"* ]]; then
         envFile=$HOME/.bash_profile
     elif [[ $defaultShell == *"zsh"* ]]; then
 	envFile=$HOME/.zshrc
     fi
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "You are using Linux"
     if [[ $defaultShell == *"bash"* ]]; then
         envFile=$HOME/.bashrc
     elif [[ $defaultShell == *"zsh"* ]]; then
@@ -32,7 +34,10 @@ echo >> $envFile
 echo "###################################" >> $envFile
 echo "#####  Add by Daily Bin ###########" >> $envFile
 echo "############################Start>>>" >> $envFile
-echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
+#echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
+echo for file in \$\(find "${dailybinPath}" -type f -o -type d\)\; do >> $envFile
+echo '    export PATH="$file:$PATH"
+done' >> $envFile
 
 ## Add 'open' tool to open folder from Linux Command
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then

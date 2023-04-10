@@ -1,4 +1,4 @@
-# dailybin
+# Dailybin
 Programs used almost everday. Update every now and then.
 
 ## Install
@@ -14,7 +14,7 @@ eg. `.bashrc`, `.bash_profile`, `.zshrc`, etc.
 ./upgrage
 ```
 
-## cp2k related
+## CP2K tools 
 - cpex: cp2k data extract from out file.
 - plot_dynamics: a fast plotting tool to plot the time dependence of the energies and temperature of the system one studied. NOTE: This command is based on `dplot`, and it should be run under the directory `ExtractData`.
 
@@ -54,7 +54,8 @@ text saved in /home/jack/Step_Energy.png
         └┬─────────────┬──────────────┬─────────────┬─────────────┬┘
         1.0           2.5            4.0           5.5          7.0
                               OPTIMIZATION STEP
-
+-extractLast
+To extractLast frame of xyz trajectory
 
 ## Visualization
 - dplot: plot csv data easily
