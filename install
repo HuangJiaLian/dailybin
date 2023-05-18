@@ -21,7 +21,7 @@ fi
 dailybinPath=`pwd`
 
 # Check if installed before
-if grep -q "#####  Add by Daily Bin ###########" "$envFile"; then
+if grep -q "# DailyBin" "$envFile"; then
     # Install Before was found
     echo 'Dailybin has been installed on your system.'
     exit -1
@@ -30,12 +30,12 @@ fi
 # Modify the envFile
 echo >> $envFile
 echo "###################################" >> $envFile
-echo "#####  Add by Daily Bin ###########" >> $envFile
+echo "# DailyBin" >> $envFile
 echo "############################Start>>>" >> $envFile
-#echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
-echo for file in \$\(find "${dailybinPath}" -type f -o -type d\)\; do >> $envFile
-echo '    export PATH="$file:$PATH"
-done' >> $envFile
+echo export PATH="\"${dailybinPath}/bin:\$PATH\"" >> $envFile
+#echo for file in \$\(find "${dailybinPath}" -type f -o -type d\)\; do >> $envFile
+#echo '    export PATH="$file:$PATH"
+#done' >> $envFile
 
 ## Add 'open' tool to open folder from Linux Command
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
