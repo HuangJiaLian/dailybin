@@ -1,0 +1,12 @@
+#!/bin/bash
+
+download_folder="$HOME/Download"
+file_name="2023-05-18-10-46-FinnishKeyboard.png"
+download_url="https://cdn.jsdelivr.net/gh/HuangJiaLian/DataBase0@master/uPic/2023-05-18-10-46-FinnishKeyboard.png"
+if [ ! -f "$download_folder/$file_name" ]; then
+    wget -P "$download_folder" "$download_url"
+    kantu $download_folder/$file_name
+else
+    kantu $download_folder/$file_name
+fi
+
