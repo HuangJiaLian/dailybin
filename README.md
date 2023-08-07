@@ -222,4 +222,4 @@ H 11.7348 5.53013 11.9297
 
 - ccapture: Capture image from builtin camera. 
 
-
+- channelNumOf: Get the channel number of an image

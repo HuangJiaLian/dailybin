@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+from PIL import Image
+import sys
+
+def check_channels(file_path):
+    try:
+        image = Image.open(file_path)
+        channels = image.getbands()
+        num_channels = len(channels)
+
+        if num_channels == 1:
+            print("The image is a grayscale image (1 channel).")
+        elif num_channels == 3:
+            print("The image is an RGB image (3 channels).")
+        else:
+            print(f"The image has {num_channels} channels.")
+    except IOError as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python check_channels.py <file_path>")
+        sys.exit(1)
+
+    file_path = sys.argv[1]
+    check_channels(file_path)
+
