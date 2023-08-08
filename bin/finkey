@@ -1,6 +1,6 @@
 #!/bin/bash
 
-download_folder="$HOME/Download"
+download_folder="$HOME/Downloads"
 file_name="2023-05-18-10-46-FinnishKeyboard.png"
 download_url="https://cdn.jsdelivr.net/gh/HuangJiaLian/DataBase0@master/uPic/2023-05-18-10-46-FinnishKeyboard.png"
 if [ ! -f "$download_folder/$file_name" ]; then
