@@ -223,3 +223,5 @@ H 11.7348 5.53013 11.9297
 - ccapture: Capture image from builtin camera. 
 
 - channelNumOf: Get the channel number of an image
+
+- ele2anum: Change the element name in xyz file to atomic number 
