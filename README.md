@@ -225,3 +225,5 @@ H 11.7348 5.53013 11.9297
 - channelNumOf: Get the channel number of an image
 
 - ele2anum: Change the element name in xyz file to atomic number 
+
+- color2gray: Convert a color image into a gray scale image. 
