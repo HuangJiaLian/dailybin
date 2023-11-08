@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Check if exctaly one arguments are provided
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <num1>"
+  exit 1 
+fi
+
+# Specify the number of files to delete
+num_files_to_delete="$1"
+
+# Check if there are enough PNG files in the current folder
+png_files=(*.png)
+num_png_files=${#png_files[@]}
+
+if [ $num_png_files -lt $num_files_to_delete ]; then
+  echo "Not enough PNG files in the current folder."
+  exit 1
+fi
+
+# Randomly select and delete the specified number of files
+for ((i = 0; i < num_files_to_delete; i++)); do
+  # Generate a random index between 0 and the number of PNG files
+  random_index=$((RANDOM % num_png_files))
+  
+  # Get the filename at the random index
+  file_to_delete="${png_files[random_index]}"
+  
+  # Delete the file
+  rm "$file_to_delete"
+  
+  # Remove the deleted file from the array
+  png_files=("${png_files[@]:0:random_index}" "${png_files[@]:random_index+1}")
+  
+  # Update the count of remaining PNG files
+  num_png_files=${#png_files[@]}
+done
+
+echo "Deleted $num_files_to_delete random PNG files."
