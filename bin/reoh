@@ -1,33 +1,35 @@
 #!/usr/bin/env python
-
 import sys 
 
 if len(sys.argv) < 2:
     print("Ooops. Usage:" + sys.argv[0] + ' xyzFile')
     exit()
 
-# Original file
+# Input, output files
 f1 = open(sys.argv[1],'r')
-
-# Output file
-if len(sys.argv) == 3:
-    out_name = sys.argv[2]
-else:
-    out_name = sys.argv[1].split('.xyz')[0] + '_RROH.xyz' 
+out_name = sys.argv[2] if len(sys.argv) == 3 else sys.argv[1].split('.xyz')[0] + '_RROH.xyz'
 f2 = open(out_name, 'w')
 
+#if len(sys.argv) == 3:
+#    out_name = sys.argv[2]
+#else:
+#    out_name = sys.argv[1].split('.xyz')[0] + '_RROH.xyz' 
+
+
 # File as a variable to get the atom numbers
-f3 = open(sys.argv[1],'r')
+f3 = open(sys.argv[1], 'r')
 num_atom = f3.readline() # Type is string
 num = int(num_atom)
+print('Number of atoms:{}'.format(num))
 f3.close()
-# print('Number of atoms:{}'.format(num))
 
 # Ya is a guy who company with me to write this program
 line = 'Ya'
 
 # A section_O is to store all O atom info in one frame
-section_O = section_H = ''
+section_O = '' 
+section_H = ''
+#section_O = section_H = ''
 
 # Read input file and write to output file
 # line by line

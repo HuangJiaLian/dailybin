@@ -229,3 +229,5 @@ H 11.7348 5.53013 11.9297
 - color2gray: Convert a color image into a gray scale image. 
 
 - randomDelPNG: Delete PNG files randomly.
+
+- addbox: add simulation box to xyz file
