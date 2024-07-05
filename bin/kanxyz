@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+from ase import Atoms
+from ase.visualize import view
+import numpy as np
+import sys 
+
+def read_xyz_with_atomic_numbers(file_path):
+    '''
+    Read coordinates from an XYZ file and return an Atoms object.
+    '''
+    atomic_numbers_to_symbols = {1: 'H', 8: 'O', 29: 'Cu',  79: 'Au'}
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    # Read number of atoms and comment line
+    num_atoms = int(lines[0])
+    comment = lines[1].strip()
+    print(comment)
+
+    symbols = []
+    positions = []
+    for line in lines[2:2 + num_atoms]:
+        parts = line.split()
+        atomic_number = int(parts[0])
+        x, y, z = map(float, parts[1:4])
+
+        symbol = atomic_numbers_to_symbols[atomic_number]
+        symbols.append(symbol)
+        positions.append([x, y, z])
+    positions = np.array(positions)
+    return Atoms(symbols=symbols, positions=positions)
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print('Usage: python {} [path to xyz file]'.format(sys.argv[0]))
+        sys.exit(1)
+    filePath = sys.argv[1]
+    atoms = read_xyz_with_atomic_numbers(filePath)
+    view(atoms)
