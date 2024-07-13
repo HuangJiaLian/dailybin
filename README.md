@@ -4,6 +4,7 @@ Programs used almost everday. Update every now and then.
 ## Install
 ```bash
 git clone git@github.com:HuangJiaLian/dailybin.git
+cd dailybin
 ./install
 ```
 Install scipt will add some lines to your default shell evironment file. 
