@@ -4,6 +4,9 @@ import numpy as np
 import os
 npz_files = [f for f in os.listdir('.') if f.endswith('.npz')]
 
+# Create a directory to store the PNG files
+os.makedirs('png', exist_ok=True)
+
 # Create a text log file to recod the original name of the NPZ files and the number of images in each file
 with open('npz2png.log', 'w') as log_file:
     for npz_file in npz_files:
