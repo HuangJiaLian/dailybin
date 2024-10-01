@@ -10,10 +10,9 @@ if len(sys.argv) > 1:
 else:
     png_dir = 'png/'
 
-# Ensure the output directory exists
-if not os.path.exists('ppafm_style'):
-    os.makedirs('ppafm_style')
-
+# Set default dimensions if known (example values)
+default_lengthX = 192  
+default_lengthY = 192 
 
 # Dictionary to hold image data grouped by original NPZ file prefix
 images_dict = {}
@@ -43,5 +42,6 @@ for prefix, indexed_imgs in images_dict.items():
     stacked_images = np.stack(img_arrays, axis=2)
 
     # Save as NPZ, mimicking the original structure
-    np.savez(f'ppafm_style/{prefix}_ppafm_style.npz', data=stacked_images)
+    np.savez(f'{png_dir}/{prefix}_ppafm_style.npz', data=stacked_images, lengthX=default_lengthX, lengthY=default_lengthY)
 
+print('nzp files saved in {}.'.format(png_dir))
