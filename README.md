@@ -226,4 +226,5 @@ H 11.7348 5.53013 11.9297
 - randomDelPNG: Delete PNG files randomly.
 - addbox: add simulation box to xyz file
 - kanxyz: show the structure of xyz file
-
+- npz2png: convert npz file containing slices of AFM to png files
+- png2npz: convert multiple png files to one npz files
