@@ -1,0 +1,47 @@
+#!/bin/env python3
+import numpy as np
+import sys
+from PIL import Image
+import os
+
+# Directory containing the PNG files. It's png/ by default if there is no command line argument provided
+if len(sys.argv) > 1:
+    png_dir = sys.argv[1]
+else:
+    png_dir = 'png/'
+
+# Ensure the output directory exists
+if not os.path.exists('ppafm_style'):
+    os.makedirs('ppafm_style')
+
+
+# Dictionary to hold image data grouped by original NPZ file prefix
+images_dict = {}
+
+# Scan through all PNG files in the directory
+for png_file in os.listdir(png_dir):
+    if png_file.endswith('.png'):
+        # Extract the prefix and the image index from the file name
+        parts = png_file.split('_')
+        prefix = '_'.join(parts[:-1])
+        index = int(parts[-1].split('.')[0])  # Extract the index and convert to integer
+
+        # Load the image
+        image = Image.open(os.path.join(png_dir, png_file)).convert('L')  # Ensure it's loaded in 8-bit grayscale mode
+        image_array = np.array(image)
+
+        # Append to list in the dictionary under the prefix key
+        if prefix not in images_dict:
+            images_dict[prefix] = []
+        images_dict[prefix].append((index, image_array))
+
+# Now, save each list of images as an NPZ file
+for prefix, indexed_imgs in images_dict.items():
+    # Sort images by index before stacking
+    indexed_imgs.sort(key=lambda x: x[0])  # Sort by the index
+    img_arrays = [img[1] for img in indexed_imgs]  # Extract just the image arrays
+    stacked_images = np.stack(img_arrays, axis=2)
+
+    # Save as NPZ, mimicking the original structure
+    np.savez(f'ppafm_style/{prefix}_ppafm_style.npz', data=stacked_images)
+
