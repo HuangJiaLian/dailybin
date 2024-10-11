@@ -8,7 +8,7 @@ def read_xyz_with_atomic_numbers(file_path):
     '''
     Read coordinates from an XYZ file and return an Atoms object.
     '''
-    atomic_numbers_to_symbols = {1: 'H', 8: 'O', 29: 'Cu',  79: 'Au'}
+    atomic_numbers_to_symbols = {1: 'H', 6: 'C', 8: 'O', 29: 'Cu',  79: 'Au'}
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
