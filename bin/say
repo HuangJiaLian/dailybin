@@ -1,0 +1,10 @@
+#!/bin/bash
+PYPATH="/home/jie/.jieprograms/miniconda3/bin/python"
+MODEL="$HOME/.jieprograms/piper_voice/en_GB-jenny_dioco-medium"
+if [ -t 0 ]; then
+    # If stdin is not piped, use arguments
+    echo "$@" | $PYPATH -m piper -m "$MODEL"
+else
+    # If stdin is piped, read from stdin
+    $PYPATH -m piper -m "$MODEL"
+fi
