@@ -1,0 +1,1 @@
+ase convert --input-format vasp --output-format extxyz $1 $2
