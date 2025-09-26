@@ -1,0 +1,131 @@
+#!/usr/bin/env python
+# This script converts XYZ files to POSCAR format for VASP
+# Input: XYZ file from command line argument
+# Output: POSCAR file in the current directory if not already present
+
+import sys
+import os
+import numpy as np
+from collections import OrderedDict
+from ase.io import read
+from ase.data import atomic_numbers
+
+def xyz_to_poscar(xyz_filename, poscar_filename=None):
+    """
+    Convert XYZ file to POSCAR format with custom formatting.
+    
+    Args:
+        xyz_filename (str): Path to input XYZ file
+        poscar_filename (str): Path to output POSCAR file (optional)
+    """
+    # Read the XYZ file using ASE
+    atoms = read(xyz_filename)
+
+    # Get the base filename for the title
+    title = os.path.basename(xyz_filename)
+    
+    # If no output filename provided, create one in the same directory
+    if poscar_filename is None:
+        poscar_filename = f'{title}.POSCAR'
+
+    # Check if POSCAR already exists
+    if os.path.exists(poscar_filename):
+        print(f"POSCAR file already exists: {poscar_filename}")
+        response = input("Overwrite? (y/n): ")
+        if response.lower() != 'y':
+            print("Conversion cancelled.")
+            return
+    
+    
+    # Get cell parameters - if no cell defined, estimate from atom positions
+    if atoms.cell is None or np.all(atoms.cell == 0):
+        # Estimate cell size from atomic positions with padding
+        print("No cell information found in XYZ. Estimating cell size from atomic positions.")
+        positions = atoms.get_positions()
+        min_coords = np.min(positions, axis=0) - 5.0
+        max_coords = np.max(positions, axis=0) + 5.0
+        cell_size = max_coords - min_coords
+        # Create cubic cell with the maximum dimension
+        max_size = np.max(cell_size)
+        cell = np.diag([max_size, max_size, max_size])
+        # Center atoms in the cell
+        center_offset = (max_size - cell_size) / 2 - min_coords
+        positions += center_offset
+    else:
+        cell = atoms.cell
+        positions = atoms.get_positions()
+    
+    # Group atoms by element
+    elements = atoms.get_chemical_symbols()
+    element_indices = {}
+    
+    # Get unique elements and group indices
+    for i, element in enumerate(elements):
+        if element not in element_indices:
+            element_indices[element] = []
+        element_indices[element].append(i)
+    
+    # Sort elements by atomic number (H=1, He=2, Li=3, etc.)
+    unique_elements = sorted(element_indices.keys(), key=lambda x: atomic_numbers[x])
+    
+    # Write POSCAR file
+    with open(poscar_filename, 'w') as f:
+        # Title
+        f.write(f"{title}\n")
+        
+        # Scaling factor
+        f.write("  1.000000\n")
+        
+        # Lattice vectors
+        for i in range(3):
+            f.write(f"          {cell[i,0]:10.6f}        {cell[i,1]:10.6f}        {cell[i,2]:10.6f} \n")
+        
+        # Element names
+        f.write("  " + "  ".join(unique_elements) + "  \n")
+        
+        # Number of atoms per element
+        counts = [len(element_indices[element]) for element in unique_elements]
+        f.write("  " + "  ".join(map(str, counts)) + "  \n")
+        
+        # Selective dynamics
+        f.write("Selective\n")
+        
+        # Coordinate system
+        f.write("Cartesian\n")
+        
+        # Write coordinates grouped by element
+        for element in unique_elements:
+            for idx in element_indices[element]:
+                pos = positions[idx]
+                f.write(f"         {pos[0]:10.6f}        {pos[1]:10.6f}        {pos[2]:10.6f} T  T  T  \n")
+    
+    print(f"Successfully converted {xyz_filename} to {poscar_filename}")
+    print(f"Elements found: {unique_elements}")
+    print(f"Atom counts: {counts}")
+
+def main():
+    """Main function to handle command line arguments."""
+    if len(sys.argv) != 2:
+        print("Usage: python xyz2POSCAR.py <xyz_file>")
+        print("Example: python xyz2POSCAR.py structure.xyz")
+        sys.exit(1)
+    
+    xyz_file = sys.argv[1]
+    
+    # Check if input file exists
+    if not os.path.exists(xyz_file):
+        print(f"Error: XYZ file not found: {xyz_file}")
+        sys.exit(1)
+    
+    # Check if it's an XYZ file
+    if not xyz_file.lower().endswith('.xyz'):
+        print("Warning: File doesn't have .xyz extension")
+    
+    try:
+        xyz_to_poscar(xyz_file)
+    except Exception as e:
+        print(f"Error during conversion: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
