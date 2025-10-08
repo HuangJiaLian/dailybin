@@ -1,0 +1,2 @@
+#/bin/bash
+ase convert -f $1 -o cif $1.cif
